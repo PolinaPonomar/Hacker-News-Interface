@@ -19,8 +19,6 @@ function Story(props) {
             console.log(err);
         });
     }, []);
-    
-    // console.log(story);
 
     return (
         <p>{story.title}{story.time}</p>
