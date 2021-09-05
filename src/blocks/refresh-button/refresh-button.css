@@ -1,0 +1,22 @@
+.refresh-button {
+    margin-right: 30px;
+    padding: 0;
+    background-color: transparent;
+    height: 36px;
+    width: 36px;
+    border: none;
+    background-image: url(../../images/refresh-icon.svg);
+    background-size: 36px 36px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opasity 0.5s ease-in;
+}
+
+.refresh-button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.refresh-button:focus {
+    outline: none;
+}
