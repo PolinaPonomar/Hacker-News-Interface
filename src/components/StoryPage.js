@@ -1,6 +1,7 @@
-function  StoryPage() {
+function  StoryPage(props) {
+    console.log(props.openStory);
     return (
-        <p>Привет!</p>
+        <p>{props.openStory.title}</p>
     );
 }
 

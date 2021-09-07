@@ -5,51 +5,40 @@ import Header from './Header';
 import Main from './Main';
 import StoryPage from './StoryPage';
 import Footer from './Footer';
-// import {timeConverter} from '../utils/utils';
+
 
 function App() {
-    const [storiesIds, setStoriesIds] = useState([]);
-    // const [story, setStory] = useState({});
+    const [stories, setStories] = useState([]);
+    const [openStory, setOpenStory] = useState({});
 
     useEffect(() => {
-        api.getIdsOfNewStories()
-        .then((ids) => {
-            setStoriesIds(ids);
-            storiesIds.sort((a, b) =>  b - a);
-
+        api.getNewStories()
+        .then((stories) => {
+            setStories(stories);
         })
         .catch((err) => {
             console.log(err);
         });
+
     }, []);
 
-    // const makeStorie = (id) => {
-    //     api.getStorieById(id)
-    //     .then((story) => {
-    //         return {
-    //             title: story.title,
-    //             score: story.score,
-    //             author: story.by,
-    //             time: timeConverter(story.time),
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
+    const handleOpenStory = (story) => {
+        console.log('я работаю');
+        setOpenStory(story);
+    };
 
-    // };
-
-    // console.log(storiesIds);
-      
     return (
         <div className="page">
             <Header/>
             <Switch>
                 <Route exact path="/">
-                    <Main storiesIds ={storiesIds}/>
+                    <Main
+                        stories={stories}
+                        onOpenStory={handleOpenStory}
+                    />
                 </Route>
                 <Route path="/story">
-                    <StoryPage/>
+                    <StoryPage openStory={openStory}/>
                 </Route>
                 {/* <Route>
                     <NotFoundPage/>

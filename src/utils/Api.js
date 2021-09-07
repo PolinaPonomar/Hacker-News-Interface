@@ -7,16 +7,6 @@ const checkResponse = (res) => {
     return Promise.reject(`Ошибка: ${res.status}`) 
 }
 
-export const getIdsOfNewStories = () => {
-    return fetch(`${BASE_URL}/newstories.json`, {
-        method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        }
-    })
-    .then(checkResponse)
-};
-
 export const getStorieById = (id) => {
     return fetch(`${BASE_URL}/item/${id}.json`, {
         method: 'GET',
@@ -26,3 +16,19 @@ export const getStorieById = (id) => {
     })
     .then(checkResponse)
 };
+
+export const getNewStories = () => {
+    return fetch(`${BASE_URL}/newstories.json`, {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json',
+        }
+    })
+    .then(checkResponse)
+    .then((ids) => {
+        return Promise.all(
+            ids.slice(0, 100).map((id) => getStorieById(id))
+        )
+    })
+};
+

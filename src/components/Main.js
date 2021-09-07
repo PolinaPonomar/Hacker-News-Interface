@@ -4,8 +4,8 @@ function Main(props) {
     return (
         <main className="content">
             {
-                props.storiesIds.slice(0,100).map(id => 
-                    ( <Story id={id} key={id}/> )
+                props.stories.map(story => 
+                    ( <Story story={story} key={story.id} onOpenStory={props.onOpenStory}/> )
                 )
             }
         </main>

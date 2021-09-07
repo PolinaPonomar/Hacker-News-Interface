@@ -8,6 +8,7 @@
     border: 1px solid #90e54e;
     border-radius: 25px;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 .story:last-of-type {
