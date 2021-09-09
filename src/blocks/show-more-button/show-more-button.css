@@ -1,0 +1,22 @@
+.show-more-button {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    height: 13px;
+    width: 13px;
+    border: none;
+    background-image: url(../../images/show-more-icon.svg);
+    background-size: 13px 13px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opasity 0.5s ease-in;
+}
+
+.show-more-button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.show-more-button:focus {
+    outline: none;
+}

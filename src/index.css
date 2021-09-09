@@ -8,8 +8,9 @@
 @import url(./blocks/header/__title/header__title.css);
 @import url(./blocks/refresh-button/refresh-button.css);
 
-/* content */
+/* main */
 @import url(./blocks/content/content.css);
+@import url(./blocks/spinner/spinner.css);
 @import url(./blocks/story/story.css);
 @import url(./blocks/story/__top-wrapper/story__top-wrapper.css);
 @import url(./blocks/story/__down-wrapper/story__down-wrapper.css);
@@ -17,3 +18,10 @@
 @import url(./blocks/story/__text/story__text.css);
 @import url(./blocks/story/__text-accent/story__text-accent.css);
 @import url(./blocks/story/__score-icon/story__score-icon.css);
+
+/* storypage */
+@import url(./blocks/story-card/story-card.css);
+@import url(./blocks/story-comments/story-comments.css);
+@import url(./blocks/story-comments/__item/story-comments__item.css);
+@import url(./blocks/comment-info/comment-info.css);
+@import url(./blocks/show-more-button/show-more-button.css);

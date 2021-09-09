@@ -1,0 +1,9 @@
+.story-comments__item {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+}
+
+.story-comments__item:hover {
+    cursor: pointer;
+}

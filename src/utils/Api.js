@@ -5,7 +5,7 @@ const checkResponse = (res) => {
         return res.json()
     } 
     return Promise.reject(`Ошибка: ${res.status}`) 
-}
+};
 
 export const getStorieById = (id) => {
     return fetch(`${BASE_URL}/item/${id}.json`, {
@@ -32,3 +32,8 @@ export const getNewStories = () => {
     })
 };
 
+export const getComments = (ids) => {
+    return Promise.all(
+        ids.map((id) => getStorieById(id))
+    )
+};

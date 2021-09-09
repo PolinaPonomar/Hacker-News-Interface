@@ -1,13 +1,19 @@
 import Story from './Story';
+import { Spinner } from 'react-bootstrap';
 
 function Main(props) {
     return (
         <main className="content">
-            {
-                props.stories.map(story => 
-                    ( <Story story={story} key={story.id} onOpenStory={props.onOpenStory}/> )
-                )
-            }
+            {props.isSpinnerActive ? (
+                <Spinner className="spinner" animation="border" variant="dark"/>
+            ) : (
+                props.stories.map(item => {
+                    if (item !== null) {
+                        return ( <Story story={item} key={item.id} onOpenStory={props.onOpenStory}/> )
+                    }
+                })
+            )}
+            
         </main>
     );
 }
