@@ -11,6 +11,7 @@ function App() {
     const [openStoryComments, setOpenStoryComments] = useState([]);
     const [isSpinnerActive, setIsSpinnerActive] = useState(false);
     const [clickToUpdate, setClickToUpdate] = useState(false);
+    const [updateOnceAMinute, setUpdateOnceAMinute] = useState(false);
 
     useEffect(() => {
         if (sessionStorage.getItem('openStory')) {
@@ -31,8 +32,22 @@ function App() {
             setIsSpinnerActive(false);
             console.log(err);
         });
-
     }, [clickToUpdate]);
+
+    useEffect(() => {
+        setTimeout( () => {
+            setUpdateOnceAMinute(!updateOnceAMinute);
+            api.getNewStories()
+            .then((stories) => {
+                setIsSpinnerActive(false);
+                setStories(stories);
+            })
+            .catch((err) => {
+                setIsSpinnerActive(false);
+                console.log(err);
+            });
+        }, 60000);
+    }, [updateOnceAMinute]);
 
     const handleStoriesUpdate = () => {
         setClickToUpdate(!clickToUpdate);
@@ -41,6 +56,10 @@ function App() {
     const handleOpenStory = (story) => {
         setOpenStory(story);
         sessionStorage.setItem('openStory', JSON.stringify(story));
+        handleUpdateComments(story);
+    };
+
+    const handleUpdateComments = (story) => {
         if (story.kids) {
             api.getComments(story.kids)
             .then((comments) => {
@@ -51,7 +70,7 @@ function App() {
                 console.log(err);
             });
         }
-    };
+    }
 
     return (
         <div className="page">
@@ -68,6 +87,7 @@ function App() {
                     <StoryPage 
                         openStory={openStory}
                         openStoryComments={openStoryComments}
+                        onUpdateComments={handleUpdateComments}
                 />
                 </Route>
             </Switch>

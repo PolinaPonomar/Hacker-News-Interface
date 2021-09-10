@@ -1,8 +1,26 @@
-import {timeConverter} from '../utils/utils';
+import { useState, useEffect } from 'react';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 import Comment from './Comment';
+import {timeConverter} from '../utils/utils';
 
 function  StoryPage(props) {
+    const [clickToUpdate, setClickToUpdate] = useState(false);
+    const [updateOnceAMinute, setUpdateOnceAMinute] = useState(false);
+
+    useEffect(() => {
+        props.onUpdateComments(props.openStory);
+    }, [clickToUpdate]);
+
+    useEffect(() => {
+        setTimeout( () => {
+            setUpdateOnceAMinute(!updateOnceAMinute);
+            props.onUpdateComments(props.openStory);
+        }, 60000);
+    }, [updateOnceAMinute]);
+
+    function handleClick() {
+        setClickToUpdate(!clickToUpdate);
+    };
     
     return (
         <main className="content">
@@ -23,7 +41,7 @@ function  StoryPage(props) {
                 (<>
                     <Card.Header className="story-comments__header">
                         <p className="story-comments__title">Сommented {props.openStory.kids.length} times</p>
-                        <button type="button" className="refresh-button refresh-button__small"></button>
+                        <button type="button" className="refresh-button refresh-button__small" onClick={handleClick}></button>
                     </Card.Header>
                     <ListGroup variant="flush">
                         {
@@ -37,7 +55,10 @@ function  StoryPage(props) {
                     </ListGroup>
                 </>
                 ) : (
-                    <Card.Header>No comments yet :(</Card.Header>
+                    <Card.Header className="story-comments__header">
+                        <p className="story-comments__title">No comments yet :(</p>
+                        <button type="button" className="refresh-button refresh-button__small" onClick={handleClick}></button>
+                    </Card.Header>
                 )}
             </Card>
         </main>      
