@@ -4,14 +4,13 @@ import * as api from '../utils/Api';
 import Header from './Header';
 import Main from './Main';
 import StoryPage from './StoryPage';
-import Footer from './Footer';
-
 
 function App() {
     const [stories, setStories] = useState([]);
     const [openStory, setOpenStory] = useState({});
     const [openStoryComments, setOpenStoryComments] = useState([]);
     const [isSpinnerActive, setIsSpinnerActive] = useState(false);
+    const [clickToUpdate, setClickToUpdate] = useState(false);
 
     useEffect(() => {
         if (sessionStorage.getItem('openStory')) {
@@ -33,7 +32,11 @@ function App() {
             console.log(err);
         });
 
-    }, []);
+    }, [clickToUpdate]);
+
+    const handleStoriesUpdate = () => {
+        setClickToUpdate(!clickToUpdate);
+    };
 
     const handleOpenStory = (story) => {
         setOpenStory(story);
@@ -44,12 +47,15 @@ function App() {
                 setOpenStoryComments(comments);
                 sessionStorage.setItem('openStoryComments', JSON.stringify(comments));
             })
+            .catch((err) => {
+                console.log(err);
+            });
         }
     };
 
     return (
         <div className="page">
-            <Header/>
+            <Header onStoriesUpdate={handleStoriesUpdate}/>
             <Switch>
                 <Route exact path="/">
                     <Main
@@ -60,15 +66,11 @@ function App() {
                 </Route>
                 <Route path="/story">
                     <StoryPage 
-                    openStory={openStory}
-                    openStoryComments={openStoryComments}
+                        openStory={openStory}
+                        openStoryComments={openStoryComments}
                 />
                 </Route>
-                {/* <Route>
-                    <NotFoundPage/>
-                </Route> */}
             </Switch>
-            <Footer/>
         </div>
     );
 }

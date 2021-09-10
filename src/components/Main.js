@@ -2,6 +2,7 @@ import Story from './Story';
 import { Spinner } from 'react-bootstrap';
 
 function Main(props) {
+    
     return (
         <main className="content">
             {props.isSpinnerActive ? (
