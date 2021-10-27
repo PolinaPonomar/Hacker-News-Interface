@@ -19,7 +19,7 @@ function App() {
             setOpenStory(JSON.parse(sessionStorage.getItem('openStory')));
         }
         if (sessionStorage.getItem('openStoryComments')) {
-            // чтобы при обновлении старницы с новостью, новость не терялась
+            // чтобы при обновлении старницы с новостью, комментарии не терялись
             setOpenStoryComments(JSON.parse(sessionStorage.getItem('openStoryComments')));
         }
         setIsSpinnerActive(true);
