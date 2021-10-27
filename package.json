@@ -2,7 +2,7 @@
   "name": "hacker-news-interface",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://polinaponomar.github.io/hacker-news-interface/",
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
